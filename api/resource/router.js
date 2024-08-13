@@ -3,7 +3,7 @@ const router = require('express').Router()
 const Resource = require('./model')
 
 router.get('/', (req, res, next) => {
-    Resource.getResource()
+    Resource.getResource(req.params.resource_id)
         .then(resource => {
             res.status(200).json(resource)
         })
@@ -11,9 +11,10 @@ router.get('/', (req, res, next) => {
 })
 
 router.post('/', (req, res, next) => {
-    Resource.postResource()
+    const {resource_name, resource_description} = req.body
+    Resource.postResource(resource_name, resource_description)
         .then(resource => {
-            res.status(200).json(resource)
+            res.status(201).json(resource)
         })
         .catch(next)
 })
