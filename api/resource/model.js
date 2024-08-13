@@ -6,12 +6,10 @@ async function getResource(){
 }
 
 async function postResource(name, description){
-    const resourceRows = await db('resources').insert({resource_name: name, resource_description: description})
+    return await db('resources').insert({resource_name: name, resource_description: description})
     .then(([resource_id])=> {
         return  db('resources').where('resource_id', resource_id).first()
     })
-    
-    return resourceRows
 }
 
 module.exports = {
