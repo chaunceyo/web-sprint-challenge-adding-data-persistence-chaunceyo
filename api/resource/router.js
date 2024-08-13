@@ -3,11 +3,19 @@ const router = require('express').Router()
 const Resource = require('./model')
 
 router.get('/', (req, res, next) => {
-    res.json({message: "Getting resource"})
+    Resource.getResource()
+        .then(resource => {
+            res.status(200).json(resource)
+        })
+        .catch(next)
 })
 
 router.post('/', (req, res, next) => {
-    res.json({message: "Posting resource"})
+    Resource.postResource()
+        .then(resource => {
+            res.status(200).json(resource)
+        })
+        .catch(next)
 })
 
 module.exports = router

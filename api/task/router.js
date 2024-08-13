@@ -3,11 +3,21 @@ const router = require('express').Router()
 const Task = require('./model')
 
 router.get('/', (req, res, next) => {
-    res.json({message: "Getting task"})
+    Task.getTask()
+        .then(task => {
+            res.status(200).json(task)
+        })
+        .catch(next)
 })
 
 router.post('/', (req, res, next) => {
-    res.json({message: "Posting task"})
+    Task.postTask()
+        .then(task => {
+            res.status(200).json(task)
+        })
+        .catch(next)
 })
+
+
 
 module.exports = router
